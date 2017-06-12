@@ -4,7 +4,11 @@
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.15.3",
+    "redux-saga-router": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",
@@ -45,9 +49,9 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "start": "NODE_PATH=src/ node scripts/start.js",
+    "build": "NODE_PATH=src/ node scripts/build.js",
+    "test": "NODE_PATH=src/ node scripts/test.js --env=jsdom"
   },
   "jest": {
     "collectCoverageFrom": [
