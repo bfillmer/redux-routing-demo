@@ -3,8 +3,8 @@ import {createStore, compose, applyMiddleware} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
 import {rootSaga} from 'state/sagas'
+import {reducer} from 'state/reducer'
 
-const reducer = (state = {}, action) => state
 const sagaMiddleware = createSagaMiddleware()
 
 // Use Redux DevTools Extension if available and not in production.
