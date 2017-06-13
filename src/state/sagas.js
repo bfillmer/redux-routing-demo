@@ -1,5 +1,8 @@
 
-import {fork, take} from 'redux-saga/effects'
+import {fork, put, take} from 'redux-saga/effects'
+import {delay} from 'redux-saga'
+
+import {showLoading, hideLoading} from 'state/reducer'
 
 export function* rootSaga () {
   yield fork(loginSaga)
@@ -11,10 +14,16 @@ export function* rootSaga () {
 // import them for consistency.
 export function* loginSaga () {
   yield take('LOAD_LOGIN')
+  yield put(showLoading())
+  yield delay(2000)
   yield console.log('Login Loaded')
+  yield put(hideLoading())
 }
 
 export function* editorSaga () {
   yield take('LOAD_EDITOR')
+  yield put(showLoading())
+  yield delay(2000)
   yield console.log('Editor Loaded')
+  yield put(hideLoading())
 }
