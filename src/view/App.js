@@ -1,18 +1,16 @@
 
 import React from 'react'
-import {connect} from 'react-redux'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
-import {componentMap} from 'routes'
+import {Login} from 'view/Login'
+import {Editor} from 'view/Editor'
 
-const mapStateToProps = state => ({
-  id: state.href
-})
-
-// @TODO Some type of default component in the advent that, somehow, you hit this
-// without the initialState set without a route.
-export const Container = ({id}) => {
-  const View = componentMap[id] ? componentMap[id]() : null
-  return (<View />)
-}
-
-export const App = connect(mapStateToProps)(Container)
+export const App = () => (
+  <Router>
+    <div>
+      <Route exact path="/" component={Login}/>
+      <Route path="/login" component={Login}/>
+      <Route path="/editor" component={Editor}/>
+    </div>
+  </Router>
+)

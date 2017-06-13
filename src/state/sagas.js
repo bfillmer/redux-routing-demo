@@ -1,28 +1,20 @@
 
-import {fork, put} from 'redux-saga/effects'
-import {router, createBrowserHistory} from 'redux-saga-router'
-
-import {routes, sagaMap} from 'routes'
-
-const history = createBrowserHistory()
+import {fork, take} from 'redux-saga/effects'
 
 export function* rootSaga () {
-  yield fork(router, history, sagaMap)
+  yield fork(loginSaga)
+  yield fork(editorSaga)
 }
 
 // @NOTE Would move these to their own files, import actions from the central
 // actions and obviously have types setup so the reducer, sagas, and actions all
 // import them for consistency.
 export function* loginSaga () {
-  yield put({
-    type: 'NAVIGATE',
-    payload: routes.login
-  })
+  yield take('LOAD_LOGIN')
+  yield console.log('Login Loaded')
 }
 
 export function* editorSaga () {
-  yield put({
-    type: 'NAVIGATE',
-    payload: routes.editor
-  })
+  yield take('LOAD_EDITOR')
+  yield console.log('Editor Loaded')
 }
