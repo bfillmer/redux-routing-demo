@@ -15,6 +15,8 @@ function* showHideLoader (saga) {
   yield put(hideLoading())
 }
 
+// @NOTE Would want multiple functions in a similar style to this to do the data
+// loads and update state to whatever is needed for the route in question.
 function* fakeApiCall () {
   yield delay(2000)
 }
