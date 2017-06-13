@@ -1,5 +1,5 @@
 
-import {call, fork, put, take} from 'redux-saga/effects'
+import {call, fork, put, takeEvery} from 'redux-saga/effects'
 import {delay} from 'redux-saga'
 
 import {showLoading, hideLoading} from 'state/reducer'
@@ -23,11 +23,9 @@ function* fakeApiCall () {
 // actions and obviously have types setup so the reducer, sagas, and actions all
 // import them for consistency.
 export function* loginSaga () {
-  yield take('LOAD_LOGIN')
-  yield showHideLoader(fakeApiCall)
+  yield takeEvery('LOAD_LOGIN', () => showHideLoader(fakeApiCall))
 }
 
 export function* editorSaga () {
-  yield take('LOAD_EDITOR')
-  yield showHideLoader(fakeApiCall)
+  yield takeEvery('LOAD_EDITOR', () => showHideLoader(fakeApiCall))
 }
