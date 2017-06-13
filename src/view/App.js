@@ -7,8 +7,8 @@ import {Route} from 'react-router'
 import {history} from 'state/store'
 
 import {Login} from 'view/Login'
-import {Editor} from 'view/Editor'
-import {LoadingOverlay} from 'view/LoadingOverlay'
+import {Editor} from 'view/Editor/Container'
+import {LoadingOverlay} from 'view/Global/LoadingOverlay/Container'
 
 const mapStateToProps = state => ({
   loading: state.loading

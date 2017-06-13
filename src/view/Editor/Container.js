@@ -2,12 +2,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-const View = () => (
-  <div>
-    <h1>EDITOR VIEW</h1>
-    <a href='/login'>Login</a>
-  </div>
-)
+import {View} from 'view/Editor/View'
 
 const mapStateToProps = state => ({})
 
