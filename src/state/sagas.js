@@ -1,5 +1,5 @@
 
-import {fork, put, take} from 'redux-saga/effects'
+import {call, fork, put, take} from 'redux-saga/effects'
 import {delay} from 'redux-saga'
 
 import {showLoading, hideLoading} from 'state/reducer'
@@ -9,21 +9,25 @@ export function* rootSaga () {
   yield fork(editorSaga)
 }
 
+function* showHideLoader (saga) {
+  yield put(showLoading())
+  yield call(saga)
+  yield put(hideLoading())
+}
+
+function* fakeApiCall () {
+  yield delay(2000)
+}
+
 // @NOTE Would move these to their own files, import actions from the central
 // actions and obviously have types setup so the reducer, sagas, and actions all
 // import them for consistency.
 export function* loginSaga () {
   yield take('LOAD_LOGIN')
-  yield put(showLoading())
-  yield delay(2000)
-  yield console.log('Login Loaded')
-  yield put(hideLoading())
+  yield showHideLoader(fakeApiCall)
 }
 
 export function* editorSaga () {
   yield take('LOAD_EDITOR')
-  yield put(showLoading())
-  yield delay(2000)
-  yield console.log('Editor Loaded')
-  yield put(hideLoading())
+  yield showHideLoader(fakeApiCall)
 }
