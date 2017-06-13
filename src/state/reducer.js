@@ -1,19 +1,21 @@
 
-import {routes} from 'routes'
-import {assign} from 'state/utils'
+const initialState = false
 
-const initialState = {
-  href: routes.home
-}
-
-const navigate = (state, href) => assign({}, state, {
-  href
+// @NOTE Super rough redux code for overlay demo.
+export const showLoading = () => ({
+  type: 'SHOWED_LOAD'
 })
 
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'NAVIGATE':
-      return navigate(state, action.payload)
+export const hideLoading = () => ({
+  type: 'HID_LOAD'
+})
+
+export const reducer = (state = initialState, {type, payload}) => {
+  switch (type) {
+    case 'SHOWED_LOAD':
+      return true
+    case 'HID_LOAD':
+      return false
     default:
       return state
   }

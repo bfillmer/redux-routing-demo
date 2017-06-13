@@ -1,38 +1,33 @@
 
-import {fork, put} from 'redux-saga/effects'
+import {call, fork, put, takeEvery} from 'redux-saga/effects'
 import {delay} from 'redux-saga'
-import {router, createBrowserHistory} from 'redux-saga-router'
 
-import {routes, sagaMap} from 'routes'
-
-const history = createBrowserHistory()
+import {showLoading, hideLoading} from 'state/reducer'
 
 export function* rootSaga () {
-  yield fork(router, history, sagaMap)
+  yield fork(loginSaga)
+  yield fork(editorSaga)
+}
+
+function* showHideLoader (saga) {
+  yield put(showLoading())
+  yield call(saga)
+  yield put(hideLoading())
+}
+
+// @NOTE Would want multiple functions in a similar style to this to do the data
+// loads and update state to whatever is needed for the route in question.
+function* fakeApiCall () {
+  yield delay(2000)
 }
 
 // @NOTE Would move these to their own files, import actions from the central
 // actions and obviously have types setup so the reducer, sagas, and actions all
 // import them for consistency.
-
-// @NOTE Would handle loading component display here at the saga level.
-
 export function* loginSaga () {
-  // Display loading component.
-  yield delay(10000)
-  yield put({
-    type: 'NAVIGATE',
-    payload: routes.login
-  })
-  // Hide loading component.
+  yield takeEvery('LOAD_LOGIN', () => showHideLoader(fakeApiCall))
 }
 
 export function* editorSaga () {
-  // Display loading component.
-  yield delay(10000)
-  yield put({
-    type: 'NAVIGATE',
-    payload: routes.editor
-  })
-  // Hide loading component.
+  yield takeEvery('LOAD_EDITOR', () => showHideLoader(fakeApiCall))
 }

@@ -1,18 +1,28 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
+import {ConnectedRouter} from 'react-router-redux'
+import {Route} from 'react-router'
 
-import {componentMap} from 'routes'
+import {history} from 'state/store'
+
+import {Login} from 'view/Login'
+import {Editor} from 'view/Editor'
+import {LoadingOverlay} from 'view/LoadingOverlay'
 
 const mapStateToProps = state => ({
-  id: state.href
+  loading: state.loading
 })
 
-// @TODO Some type of default component in the advent that, somehow, you hit this
-// without the initialState set without a route.
-export const Container = ({id}) => {
-  const View = componentMap[id] ? componentMap[id]() : null
-  return (<View />)
-}
+export const Container = ({loading}) => (
+  <ConnectedRouter history={history}>
+    <div>
+      {loading && <LoadingOverlay /> }
+      <Route exact path="/" component={Login}/>
+      <Route path="/login" component={Login}/>
+      <Route path="/editor" component={Editor}/>
+    </div>
+  </ConnectedRouter>
+)
 
 export const App = connect(mapStateToProps)(Container)
