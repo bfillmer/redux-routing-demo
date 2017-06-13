@@ -4,8 +4,8 @@ import createSagaMiddleware from 'redux-saga'
 import {routerMiddleware, routerReducer} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
-import {rootSaga} from 'state/sagas'
-import {reducer} from 'state/reducer'
+import {rootSaga} from 'state/sagas/index'
+import {reducer} from 'state/reducers/index'
 
 export const history = createHistory()
 

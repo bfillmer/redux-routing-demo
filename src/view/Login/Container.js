@@ -1,18 +1,14 @@
-
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-const View = () => (
-  <div>
-    <h1>LOGIN VIEW</h1>
-    <a href='/editor'>Editor</a>
-  </div>
-)
+import {loadLogin} from 'state/actions'
+
+import {View} from './View'
 
 const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
-  loadLogin: () => dispatch({type: 'LOAD_LOGIN'})
+  loadLogin: () => dispatch(loadLogin())
 })
 
 class Container extends Component {

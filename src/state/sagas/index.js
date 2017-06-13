@@ -2,7 +2,8 @@
 import {call, fork, put, takeEvery} from 'redux-saga/effects'
 import {delay} from 'redux-saga'
 
-import {showLoading, hideLoading} from 'state/reducer'
+import {LOAD_LOGIN, LOAD_EDITOR} from 'state/types'
+import {addLoading, removeLoading} from 'state/actions/index'
 
 export function* rootSaga () {
   yield fork(loginSaga)
@@ -10,9 +11,9 @@ export function* rootSaga () {
 }
 
 function* showHideLoader (saga) {
-  yield put(showLoading())
+  yield put(addLoading('global'))
   yield call(saga)
-  yield put(hideLoading())
+  yield put(removeLoading('global'))
 }
 
 // @NOTE Would want multiple functions in a similar style to this to do the data
@@ -25,9 +26,9 @@ function* fakeApiCall () {
 // actions and obviously have types setup so the reducer, sagas, and actions all
 // import them for consistency.
 export function* loginSaga () {
-  yield takeEvery('LOAD_LOGIN', () => showHideLoader(fakeApiCall))
+  yield takeEvery(LOAD_LOGIN, () => showHideLoader(fakeApiCall))
 }
 
 export function* editorSaga () {
-  yield takeEvery('LOAD_EDITOR', () => showHideLoader(fakeApiCall))
+  yield takeEvery(LOAD_EDITOR, () => showHideLoader(fakeApiCall))
 }

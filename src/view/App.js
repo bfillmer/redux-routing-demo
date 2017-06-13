@@ -6,12 +6,12 @@ import {Route} from 'react-router'
 
 import {history} from 'state/store'
 
-import {Login} from 'view/Login'
+import {Login} from 'view/Login/Container'
 import {Editor} from 'view/Editor/Container'
 import {LoadingOverlay} from 'view/Global/LoadingOverlay/Container'
 
 const mapStateToProps = state => ({
-  loading: state.loading
+  loading: state.loading.includes('global')
 })
 
 export const Container = ({loading}) => (

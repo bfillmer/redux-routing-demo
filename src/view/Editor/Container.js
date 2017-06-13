@@ -2,12 +2,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {View} from 'view/Editor/View'
+import {loadEditor} from 'state/actions'
+
+import {View} from './View'
 
 const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
-  loadEditor: () => dispatch({type: 'LOAD_EDITOR'})
+  loadEditor: () => dispatch(loadEditor())
 })
 
 class Container extends Component {
